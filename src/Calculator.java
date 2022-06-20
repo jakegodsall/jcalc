@@ -14,6 +14,8 @@ public class Calculator implements ActionListener {
 
     Font myFont = new Font("Ink Free", Font.BOLD, 30);
 
+    int FRAME_WIDTH = 420;
+    int FRAME_HEIGHT = 550;
     double num1 = 0;
     double num2 =  0;
     double result = 0;
@@ -22,10 +24,15 @@ public class Calculator implements ActionListener {
     Calculator() {
         frame = new JFrame("Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(new Dimension(420, 550));
+        frame.setSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
         frame.setLayout(null);
 
+        textField = new JTextField();
+        textField.setBounds(50, 25, (int) (0.71 * FRAME_WIDTH), FRAME_HEIGHT / 11);
+        textField.setFont(myFont);
+        textField.setEditable(false);
 
+        frame.add(textField);
 
         frame.setVisible(true);
 
