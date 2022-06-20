@@ -66,15 +66,96 @@ public class Calculator implements ActionListener {
         delButton.setBounds(50, 430, 145, 50);
         clrButton.setBounds(205, 430, 145, 50);
 
+        panel = new JPanel();
+        panel.setBounds(50, 100, 300, 300);
+        panel.setLayout(new GridLayout(4, 4, 10, 10));
+
+        // row 1
+        panel.add(numberButtons[1]);
+        panel.add(numberButtons[2]);
+        panel.add(numberButtons[3]);
+        panel.add(addButton);
+        // row 2
+        panel.add(numberButtons[4]);
+        panel.add(numberButtons[5]);
+        panel.add(numberButtons[6]);
+        panel.add(subButton);
+        // row 3
+        panel.add(numberButtons[7]);
+        panel.add(numberButtons[8]);
+        panel.add(numberButtons[9]);
+        panel.add(mulButton);
+        // row 4
+        panel.add(decButton);
+        panel.add(numberButtons[0]);
+        panel.add(eqButton);
+        panel.add(divButton);
+
         frame.add(textField);
         frame.add(delButton);
         frame.add(clrButton);
+        frame.add(panel);
 
         frame.setVisible(true);
 
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        for (int i = 0; i < 10; i++) {
+            if (e.getSource() == numberButtons[i]) {
+                textField.setText(textField.getText().concat(String.valueOf(i)));
+            }
+        }
 
+        if (e.getSource() == decButton) {
+            textField.setText(textField.getText().concat(String.valueOf(".")));
+        }
+        if (e.getSource() == addButton) {
+            num1 = Double.parseDouble(textField.getText());
+            operator = '+';
+            textField.setText("");
+        }
+
+        if (e.getSource() == subButton) {
+            num1 = Double.parseDouble(textField.getText());
+            operator = '-';
+            textField.setText("");
+        }
+
+        if (e.getSource() == mulButton) {
+            num1 = Double.parseDouble(textField.getText());
+            operator = '*';
+            textField.setText("");
+        }
+
+        if (e.getSource() == divButton) {
+            num1 = Double.parseDouble(textField.getText());
+            operator = '/';
+            textField.setText("");
+        }
+
+        if (e.getSource() == eqButton) {
+            num2 = Double.parseDouble(textField.getText());
+
+            switch (operator) {
+                case '+' -> result = num1 + num2;
+                case '-' -> result = num1 - num2;
+                case '*' -> result = num1 * num2;
+                case '/' -> result = num1 / num2;
+            }
+            textField.setText(String.valueOf(result));
+        }
+
+        if (e.getSource() == clrButton) {
+            textField.setText("");
+        }
+
+        if (e.getSource() == delButton) {
+            String string = textField.getText();
+            textField.setText("");
+            for (int i = 0; i < string.length() - 1; i++) {
+                textField.setText(textField.getText() + string.charAt(i));
+            }
+        }
     }
 }
